@@ -1,0 +1,159 @@
+{
+  "position": "top",
+  "margin": "5 10 0 10",
+  "modules-left": ["image#hyprland-logo","hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["tray", "hyprland/language", "group/hardware", "group/infostat", "group/powermenu"],
+  "image#hyprland-logo": {
+	"path": "/home/kald0n/.config/waybar/hyprland_logo.png",
+	"size": 28
+	
+  },
+  "group/powermenu": {
+    "orientation": "inherit",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-power",
+        "transition-left-to-right": false,
+    },
+    "modules": [
+        "custom/power", // First element is the "group leader" and won't ever be hidden
+        "custom/lock",
+        "custom/quit",
+	"custom/sleep",
+        "custom/reboot",
+    ]
+},
+  "custom/quit": {
+	"format": "",
+	"tooltip": false,
+	"on-click": "hyprctl dispatch exit"
+  },
+  "custom/lock": {
+	"format": "",
+	"tooltip": false,
+	"on-click": "hyprlock"
+  },
+  "custom/reboot": {
+	"format": "",
+	"tooltip": false,
+	"on-click": "reboot"
+  },
+  "custom/power": {
+	"format": "",
+	"tooltip": false,
+	"on-double-click": "shutdown now"
+  },
+  "custom/sleep": {
+	"format": "",
+	"tooltip": false,
+	"on-click": "systemctl suspend"
+  },
+
+  "group/infostat": {
+	"orientation": "horizontal",
+	"modules": [
+		"network",
+		"pulseaudio",
+		"clock"
+	]
+  },
+  "group/hardware": {
+	"orientation": "horizontal",
+	"modules": [
+		"disk",
+		"memory",
+		"cpu"
+	]
+  },
+  "cpu": {
+	"format": " {usage}%"
+  },
+  "memory": {
+	"format": " {percentage}%"
+  },
+
+  "disk": {
+	"format": " {percentage_used}%"
+  },
+
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  
+  "clock123": {
+    "format": "<span foreground='#f5c2e7'>   </span>{:%a %d %I:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "clock": {
+        "format": " {:%a %d %I:%M %p}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-scroll-up": "tz_up",
+                    "on-scroll-down": "tz_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
+    },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span size='13000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
+    "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
+    "format-critical": "<span size='13000' foreground='#E38C8F'>{icon} </span> {capacity}%",
+    "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {time}",
+    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "{time}"
+  },
+  "network": {
+    "format-wifi": "<span size='13000' foreground='#ffffff'></span>{essid}",
+    "format-ethernet": "<span size='13000' foreground='#ffffff'></span>",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "<span size='13000' foreground='#f5e0dc'></span>",
+    "tooltip-format-wifi": "Signal Strenght: {signalStrength}%"
+  },
+  "pulseaudio": {
+      "format": "{icon}  {volume}%",
+      "format-muted": "  {volume}%",
+      "format-icons": {
+          "default": ["", " ", " "]
+      },
+      "on-click": "pavucontrol"
+  },
+  "hyprland/language": {
+    "format": "{}",
+    "format-en": "English",
+    "format-ar": "العربية"
+  },
+  "hyprland/window": {
+    "format": "{class}",
+    "icon": true
+  },
+  "hyprland/workspaces": {
+    "persistent-workspaces": {
+      "*": 3,
+    }
+  }
+}
